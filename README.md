@@ -1,4 +1,27 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Basic info  
+
+The project was created for recruitment needs. The goal here is to get data from selected [endpoint](http://adverity-challenge.s3-website-eu-west-1.amazonaws.com/DAMKBAoDBwoDBAkOBAYFCw.csv) and present it as a chart with few inputs which will control the way of presenting data at the chart.
+
+## Todo (may change with time)
+
+Basic tasks:
+- fetch data, 
+- select components library, 
+- select charts library, 
+- map ".csv" data to format needed,
+- create a first non-interactive chart with basic data, 
+- implement a way of modifying the chart with inputs.
+
+Nice to have: 
+- RWD, 
+- deployment,
+- build, 
+- some functional tests, 
+- accessibility, 
+
+Requirements: create-react-api, typescript, lodash
+
+Project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
