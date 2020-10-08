@@ -1,36 +1,68 @@
-import { renderHook, act } from "@testing-library/react-hooks";
-import useFetchChartData from "../index";
+import { renderHook } from "@testing-library/react-hooks";
+import useFetchChartData, { DATA_URL } from "../index";
+
+const mockedData = {
+  data: "somethingReallyWorthToPlaceItOnChart",
+};
+
+const errorMock = Error("someMessage");
+
+const fetchSuccessMock = () =>
+  Promise.resolve({
+    json: () => Promise.resolve(mockedData),
+  });
+
+const fetchErrorMock = () => Promise.reject(fetchErrorMock);
 
 describe("useFetchChartData()", () => {
-  test("should fetch only once", () => {
-    const { result } = renderHook(() => useFetchChartData());
+  let responseMock;
+  let spy;
 
-    act(() => {});
+  beforeEach(() => {
+    responseMock = {
+      response: null,
+      error: null,
+      isLoading: false,
+    };
 
-    expect(result).toBe();
+    spy = jest.fn(fetchSuccessMock);
+    global.fetch = spy;
   });
 
   test("should fetch only given url", () => {
-    const { result } = renderHook(() => useFetchChartData());
-
-    act(() => {});
-
-    expect(result).toBe();
+    renderHook(() => useFetchChartData());
+    expect(spy.mock.calls[0]).toBe(DATA_URL);
   });
 
-  test("should return response if fetch succeed", () => {
-    const { result } = renderHook(() => useFetchChartData());
-
-    act(() => {});
-
-    expect(result).toBe();
+  test("should fetch only once", () => {
+    const { rerender } = renderHook(() => useFetchChartData());
+    rerender();
+    expect(spy.mock.calls.length).toBe(1);
   });
 
-  test("should return error if fetch failed", () => {
-    const { result } = renderHook(() => useFetchChartData());
+  test("should return result with response if fetch succeed", async () => {
+    const { result, waitForNextUpdate } = renderHook(() => useFetchChartData());
+    await waitForNextUpdate();
 
-    act(() => {});
+    expect(result.response).toEqual(mockedData);
+  });
 
-    expect(result).toBe();
+  test("should return  with response if fetch succeed", async () => {
+    const { result, waitForNextUpdate } = renderHook(() => useFetchChartData());
+
+    expect(result.isLoading).toBe(true);
+
+    await waitForNextUpdate();
+
+    expect(result.isLoading).toBe(false);
+  });
+
+  test("should return result with error if fetch failed", async () => {
+    global.fetch = jest.fn(fetchErrorMock);
+    const { result, waitForNextUpdate } = renderHook(() => useFetchChartData());
+
+    await waitForNextUpdate();
+
+    expect(result.error).toEqual(errorMock);
   });
 });
