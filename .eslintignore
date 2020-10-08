@@ -1,0 +1,6 @@
+// .eslintignore
+build/*
+public/*
+src/stories/*
+src/react-app-env.d.ts
+src/serviceWorker.ts
