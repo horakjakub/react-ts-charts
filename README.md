@@ -18,6 +18,7 @@ Nice to have:
 - build, 
 - some functional tests, 
 - accessibility, 
+- storybook
 
 Requirements: create-react-api, typescript, lodash
 
