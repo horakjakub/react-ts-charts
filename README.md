@@ -6,8 +6,8 @@ The project was created for recruitment needs. The goal here is to get data from
 
 Basic tasks:
 - ~~fetch data,~~ 
-- select components library, 
-- select charts library, 
+- ~~select components library~~, 
+- ~~select charts library~~, 
 - map ".csv" data to format needed,
 - create a first non-interactive chart with basic data, 
 - implement a way of modifying the chart with inputs.
