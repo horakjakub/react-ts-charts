@@ -59,7 +59,8 @@
           "**/*.test.jsx",
           "**/*.test.ts",
           "**/*.test.tsx",
-          "src/tests/**/*"
+          "src/tests/**/*",
+          "**/__tests__/*.js"
         ]
       }
     ],

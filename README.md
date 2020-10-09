@@ -5,7 +5,7 @@ The project was created for recruitment needs. The goal here is to get data from
 ## Todo (may change with time)
 
 Basic tasks:
-- fetch data, 
+- ~~fetch data,~~ 
 - select components library, 
 - select charts library, 
 - map ".csv" data to format needed,
