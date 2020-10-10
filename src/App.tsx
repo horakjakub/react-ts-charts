@@ -1,11 +1,13 @@
 import React from 'react';
 import useFetchChartData from 'hooks/useFetchChartData';
+import useChartData from 'hooks/useChartData';
 import Select from '@atlaskit/select';
 import { LineChart, Line, YAxis, XAxis, Legend, Tooltip } from 'recharts';
 import '@atlaskit/css-reset';
 
 function App() {
   const { response } = useFetchChartData();
+  const { chartData, campaigns, dataSources } = useChartData(response);
 
   const data = [
     {
