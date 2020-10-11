@@ -8,9 +8,11 @@ Basic tasks:
 - ~~fetch data,~~ 
 - ~~select components library~~, 
 - ~~select charts library~~, 
-- map ".csv" data to format needed,
+- ~~map ".csv" data to format needed,~~
 - create a first non-interactive chart with basic data, 
-- implement a way of modifying the chart with inputs.
+- add styles,
+- implement a way of modifying the chart with inputs,
+- control bundle size.
 
 Nice to have: 
 - RWD, 
