@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import useCSVtoJSON, { RawChartPointData } from 'hooks/useCSVtoJSON';
 
-interface ChartPointData {
-  date: string;
+export interface ChartPointData {
+  date: Date;
   campaign: string;
   dataSource: string;
   clicks: number;

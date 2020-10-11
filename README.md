@@ -12,7 +12,8 @@ Basic tasks:
 - create a first non-interactive chart with basic data, 
 - add styles,
 - implement a way of modifying the chart with inputs,
-- control bundle size.
+- control bundle size,
+- add proper README.md info (including tests granularity).
 
 Nice to have: 
 - RWD, 
