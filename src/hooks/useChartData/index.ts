@@ -31,7 +31,7 @@ export default function useChartData(
           Clicks,
           Datasource,
           Impressions,
-          Date,
+          Date: date,
         }: RawChartPointData) => {
           sourcesSet.add(Datasource);
           campaignsSet.add(Campaign);
@@ -40,7 +40,7 @@ export default function useChartData(
             dataSource: Datasource,
             clicks: parseInt(Clicks, 10),
             impressions: parseInt(Impressions, 10),
-            date: Date,
+            date: new Date(date),
           };
         }
       );

@@ -4,11 +4,13 @@ import useCSVtoJSON from '..';
 
 jest.mock('csvtojson');
 
-const jsonMockData = {
+const mockedJsonData = {
   someMock: 'someOtherMock',
 };
 
-const fromStringMock = jest.fn(() => Promise.resolve(jsonMockData));
+const mockedCSVtxt = 'some;csv;table;';
+
+const fromStringMock = jest.fn(() => Promise.resolve(mockedJsonData));
 
 describe('useCSVtoJSON()', () => {
   beforeAll(() => {
@@ -21,59 +23,59 @@ describe('useCSVtoJSON()', () => {
     fromStringMock.mockClear();
   });
 
-  it('should pass props to "csvtojson().fromString()" module method', async () => {
+  it('should pass props to "csv to json" library module conversion method', async () => {
     const { waitForNextUpdate } = renderHook(() =>
-      useCSVtoJSON('mockedCSVtxt')
+      useCSVtoJSON(mockedCSVtxt)
     );
 
     await waitForNextUpdate();
 
-    expect(fromStringMock.mock.calls[0][0]).toBe('mockedCSVtxt');
+    expect(fromStringMock.mock.calls[0][0]).toBe(mockedCSVtxt);
   });
 
   it("shouldn't pass props if called with null", async () => {
     const { waitForNextUpdate } = renderHook(() => useCSVtoJSON(null));
 
     try {
-      await waitForNextUpdate({ timeout: 500 });
+      await waitForNextUpdate({ timeout: 100 });
       // eslint-disable-next-line
     } catch (e) {}
 
     expect(fromStringMock.mock.calls.length).toBe(0);
   });
 
-  it('should pass new props to "csvtojson().fromString()" module method, if props changed', async () => {
+  it('should pass new props to "csv to json" library module conversion method, if props changed', async () => {
     const { rerender, waitForNextUpdate } = renderHook(
       (props) => useCSVtoJSON(props),
-      { initialProps: 'mockedCSVtxt' }
+      { initialProps: mockedCSVtxt }
     );
 
     rerender('anotherMockedCSVtxt');
 
     await waitForNextUpdate();
 
-    expect(fromStringMock.mock.calls[0][0]).toBe('mockedCSVtxt');
+    expect(fromStringMock.mock.calls[0][0]).toBe(mockedCSVtxt);
     expect(fromStringMock.mock.calls[1][0]).toBe('anotherMockedCSVtxt');
   });
 
-  it('should return jsonData returned "csvtojson().fromString()" module method', async () => {
+  it('should return json data returned from "csv to json" library', async () => {
     const { result, waitForNextUpdate } = renderHook(() =>
       useCSVtoJSON('mockedCSVtxt')
     );
 
     try {
-      await waitForNextUpdate({ timeout: 500 });
+      await waitForNextUpdate({ timeout: 100 });
       // eslint-disable-next-line
     } catch (e) {}
 
-    expect(result.current).toBe(jsonMockData);
+    expect(result.current).toBe(mockedJsonData);
   });
 
   it('should return null if called with null', async () => {
     const { result, waitForNextUpdate } = renderHook(() => useCSVtoJSON(null));
 
     try {
-      await waitForNextUpdate({ timeout: 500 });
+      await waitForNextUpdate({ timeout: 100 });
       // eslint-disable-next-line
     } catch (e) {}
 
