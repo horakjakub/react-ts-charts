@@ -1,102 +1,28 @@
 import React from 'react';
+import '@atlaskit/css-reset';
 import useFetchChartData from 'hooks/useFetchChartData';
 import useChartData from 'hooks/useChartData';
-import Select from '@atlaskit/select';
-import { LineChart, Line, YAxis, XAxis, Legend, Tooltip } from 'recharts';
-import '@atlaskit/css-reset';
+import Dashboard from 'components/Dashboard';
+import ControlPanel from 'components/ControlPanel';
+import ErrorMessage from 'components/ErrorMessage';
+import Spinner from '@atlaskit/spinner';
 
 function App() {
-  const { response } = useFetchChartData();
+  const { response, isLoading, error } = useFetchChartData();
   const { chartData, campaigns, dataSources } = useChartData(response);
 
-  const data = [
-    {
-      name: 'Page A',
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: 'Page B',
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: 'Page C',
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: 'Page D',
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: 'Page E',
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: 'Page F',
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: 'Page G',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ];
-
+  if (error) return <ErrorMessage error={error} />;
   return (
     <div className="App">
-      <section>
-        <Select
-          className="single-select"
-          classNamePrefix="react-select"
-          options={[
-            { label: 'Adelaide', value: 'adelaide' },
-            { label: 'Brisbane', value: 'brisbane' },
-            { label: 'Canberra', value: 'canberra' },
-          ]}
-          placeholder="Choose a City"
-        />
-        <Select
-          isMulti
-          isSearchable={false}
-          className="multi-select"
-          classNamePrefix="react-select"
-          options={[
-            { label: 'Adelaide', value: 'adelaide' },
-            { label: 'Brisbane', value: 'brisbane' },
-            { label: 'Canberra', value: 'canberra' },
-          ]}
-          placeholder="Choose a City"
-        />
-      </section>
-      <section>
-        <LineChart width={600} height={300} data={data}>
-          <XAxis dataKey="name" />
-          <YAxis yAxisId="left" />
-          <YAxis yAxisId="right" orientation="right" />
-          <Tooltip />
-          <Legend />
-          <Line
-            yAxisId="left"
-            type="monotone"
-            dataKey="pv"
-            stroke="#8884d8"
-            activeDot={{ r: 8 }}
-          />
-          <Line yAxisId="right" type="monotone" dataKey="uv" stroke="#82ca9d" />
-        </LineChart>
-      </section>
+      <ControlPanel
+        campaigns={campaigns}
+        dataSources={dataSources}
+        isDisabled={isLoading || !chartData}
+        currentFilters={{ selectedCampaigns: [], selectedDataSources: [] }}
+        applyFilters={() => {}}
+      />
+      {isLoading && <Spinner size="large" />}
+      {chartData && <Dashboard chardData={chartData} />}
     </div>
   );
 }

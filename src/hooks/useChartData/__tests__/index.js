@@ -1,25 +1,9 @@
 import { renderHook } from '@testing-library/react-hooks';
 import useCSVtoJSON from 'hooks/useCSVtoJSON';
+import mockedRawChartData from 'utils/mocks/raw-chart-points.mock';
 import useChartData from '..';
 
 jest.mock('hooks/useCSVtoJSON');
-
-const mockedRawChartData = [
-  {
-    Campaign: 'some campaign',
-    Clicks: '10',
-    Date: '01.01.2019',
-    Impressions: '200',
-    Datasource: 'some data source',
-  },
-  {
-    Campaign: 'some campaign 2',
-    Clicks: '10',
-    Date: '01.01.2019',
-    Impressions: '200',
-    Datasource: 'some data source 2',
-  },
-];
 
 describe('useChartData()', () => {
   const spy = jest.fn();
@@ -65,7 +49,6 @@ describe('useChartData()', () => {
     const { result } = renderHook(() => useChartData(null));
 
     expect(result.current.chartData.length).toBe(mockedRawChartData.length);
-    expect(result.current.chartData[0].date instanceof Date).toBe(true);
     expect(typeof result.current.chartData[0].impressions === 'number').toBe(
       true
     );

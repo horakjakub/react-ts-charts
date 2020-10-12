@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import useCSVtoJSON, { RawChartPointData } from 'hooks/useCSVtoJSON';
 
-interface ChartPointData {
+export interface ChartPointData {
   date: string;
   campaign: string;
   dataSource: string;
@@ -31,7 +31,7 @@ export default function useChartData(
           Clicks,
           Datasource,
           Impressions,
-          Date: date,
+          Date,
         }: RawChartPointData) => {
           sourcesSet.add(Datasource);
           campaignsSet.add(Campaign);
@@ -40,7 +40,7 @@ export default function useChartData(
             dataSource: Datasource,
             clicks: parseInt(Clicks, 10),
             impressions: parseInt(Impressions, 10),
-            date: new Date(date),
+            date: Date,
           };
         }
       );
