@@ -13,7 +13,7 @@ Basic tasks:
 - add styles,
 - implement a way of modifying the chart with inputs,
 - control bundle size,
-- add proper README.md info (including tests granularity).
+- add proper README.md info (including tests granularity, and storybook explanations).
 
 Nice to have: 
 - RWD, 

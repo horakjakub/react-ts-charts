@@ -9,8 +9,6 @@ export default {
 };
 
 export const DashboardDefault = () => {
-  const cat = chartPointsData;
-
   return (
     <Dashboard
       chardData={chartPointsData.map((point, idx) => {

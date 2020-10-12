@@ -39,7 +39,7 @@ export default function useChartData(
             campaign: Campaign,
             dataSource: Datasource,
             clicks: parseInt(Clicks, 10),
-            impressions: parseInt(Impressions, 10),
+            impressions: Impressions === '' ? 0 : parseInt(Impressions, 10),
             date: Date,
           };
         }
