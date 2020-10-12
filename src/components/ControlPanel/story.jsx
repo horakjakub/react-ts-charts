@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import { action } from "@storybook/addon-actions";
-import GlobalStyle from "global-styles/storybook-decorator";
-import ControlPanel from ".";
+import React, { useState } from 'react';
+import { action } from '@storybook/addon-actions';
+import GlobalStyle from 'global-styles/storybook-decorator';
+import ControlPanel from '.';
 
 export default {
-  title: "ControlPanel",
+  title: 'ControlPanel',
   decorators: [GlobalStyle],
 };
 
 const mockedDataSources = new Set([
-  "firstDataSource",
-  "secondDataSource",
-  "thirdDataSource",
+  'firstDataSource',
+  'secondDataSource',
+  'thirdDataSource',
 ]);
 
 const mockedCampaigns = new Set([
-  "firstCampaign",
-  "secondCampaign",
-  "thirdCampaign",
+  'firstCampaign',
+  'secondCampaign',
+  'thirdCampaign',
 ]);
 
 export const ControlPanelDefault = () => {
@@ -33,7 +33,7 @@ export const ControlPanelDefault = () => {
       currentFilters={currentFilters}
       applyFilters={(filters) => {
         const { selectedDataSources, selectedCampaigns } = filters;
-        action("fiters applied")(JSON.stringify(filters));
+        action('fiters applied')(JSON.stringify(filters));
         setCurrentFilters({
           selectedDataSources,
           selectedCampaigns,

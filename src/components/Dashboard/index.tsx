@@ -1,27 +1,28 @@
-import React from "react";
-import { LineChart, Line, YAxis, XAxis, Legend, Tooltip } from 'recharts'
+import React, { memo } from 'react';
 import { ChartPointData } from 'hooks/useChartData';
+import { LineChart, Line, Tooltip, YAxis, XAxis, Legend } from 'recharts';
 
 export interface Props {
-    pointsData: ChartPointData[]
+  chardData: ChartPointData[];
 }
 
-export default function Dashboard({pointsData }: Props) {
+export default memo(Dashboard);
+
+function Dashboard({ chardData }: Props) {
   return (
-    <LineChart width={600} height={300} data={pointsData}>
+    <LineChart width={600} height={300} data={chardData}>
       <XAxis dataKey="date" />
       <YAxis yAxisId="left" />
       <YAxis yAxisId="right" orientation="right" />
       <Tooltip />
       <Legend />
+      <Line yAxisId="left" type="monotone" dataKey="clicks" stroke="#8884d8" />
       <Line
-        yAxisId="left"
+        yAxisId="right"
         type="monotone"
-        dataKey="pv"
-        stroke="#8884d8"
-        activeDot={{ r: 8 }}
+        dataKey="impressions"
+        stroke="#82ca9d"
       />
-      <Line yAxisId="right" type="monotone" dataKey="uv" stroke="#82ca9d" />
     </LineChart>
   );
 }

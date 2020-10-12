@@ -9,7 +9,7 @@ Basic tasks:
 - ~~select components library~~, 
 - ~~select charts library~~, 
 - ~~map ".csv" data to format needed,~~
-- create a first non-interactive chart with basic data, 
+- ~~create a first non-interactive chart with basic data~~, 
 - add styles,
 - implement a way of modifying the chart with inputs,
 - control bundle size,

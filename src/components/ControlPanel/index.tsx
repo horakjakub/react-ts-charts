@@ -1,6 +1,6 @@
-import React, { ReactElement, useState, memo, useMemo } from "react";
-import Button from "@atlaskit/button";
-import Select, { ValueType } from "@atlaskit/select";
+import React, { ReactElement, useState, memo, useMemo } from 'react';
+import Button from '@atlaskit/button';
+import Select, { ValueType } from '@atlaskit/select';
 
 export interface Filters {
   selectedCampaigns: string[];
@@ -64,12 +64,6 @@ function ControlPanel({
             );
           }}
         />
-        <Button
-          isDisabled={isDisabled || !campaigns}
-          onClick={() => setSelectedCampaigns([])}
-        >
-          x
-        </Button>
       </div>
       <div>
         <Select
@@ -86,13 +80,9 @@ function ControlPanel({
               values && values instanceof Array
                 ? values.map(({ value }: { value: string }) => value)
                 : []
-            ); }} />
-        <Button
-          isDisabled={isDisabled || !dataSources}
-          onClick={() => setSelectedDataSources([])}
-        >
-          x
-        </Button>
+            ); 
+          }}
+        />
       </div>
       <Button
         isDisabled={
