@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import useCSVtoJSON, { RawChartPointData } from 'hooks/useCSVtoJSON';
 
-export interface ChartPointData {
+export interface ChartPoint {
   date: string;
   campaign: string;
   dataSource: string;
@@ -9,17 +9,16 @@ export interface ChartPointData {
   impressions: number;
 }
 
-export default function useChartData(
-  CSVtext: string | null
-): {
-    chartData: ChartPointData[] | null;
-    dataSources: Set<string> | null;
-    campaigns: Set<string> | null;
-  } {
-  const jsonCharData = useCSVtoJSON(CSVtext);
+export default function useChartData(): {
+  chartData: ChartPoint[] | null;
+  dataSources: Set<string> | null;
+  campaigns: Set<string> | null;
+  doConvertToChartData: Dispatch<SetStateAction<string | null>>;
+} {
+  const { JSONData: jsonCharData, doJSONData } = useCSVtoJSON();
   const [dataSources, setDataSources] = useState<Set<string> | null>(null);
   const [campaigns, setCampaigns] = useState<Set<string> | null>(null);
-  const [chartData, setChartData] = useState<ChartPointData[] | null>(null);
+  const [chartData, setChartData] = useState<ChartPoint[] | null>(null);
 
   useEffect(() => {
     if (jsonCharData && jsonCharData.length) {
@@ -39,7 +38,7 @@ export default function useChartData(
             campaign: Campaign,
             dataSource: Datasource,
             clicks: parseInt(Clicks, 10),
-            impressions: parseInt(Impressions, 10),
+            impressions: Impressions === '' ? 0 : parseInt(Impressions, 10),
             date: Date,
           };
         }
@@ -55,5 +54,6 @@ export default function useChartData(
     chartData,
     campaigns,
     dataSources,
+    doConvertToChartData: doJSONData,
   };
 }

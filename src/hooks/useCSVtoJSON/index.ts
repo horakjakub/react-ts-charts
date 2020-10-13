@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState, Dispatch } from 'react';
 import csv from 'csvtojson';
 
 export interface RawChartPointData {
@@ -9,10 +9,13 @@ export interface RawChartPointData {
   Impressions: string;
 }
 
-export default function useCSVtoJSON(
-  CSVtext: string | null
-): RawChartPointData[] | null {
+export default function useCSVtoJSON(): {
+  JSONData: RawChartPointData[] | null;
+  doJSONData: Dispatch<SetStateAction<string | null>>;
+} {
+  const [CSVtext, setCSVtext] = useState<string | null>(null);
   const [JSONData, setJSONData] = useState<RawChartPointData[] | null>(null);
+
   useEffect(() => {
     if (CSVtext) {
       csv()
@@ -23,5 +26,8 @@ export default function useCSVtoJSON(
     }
   }, [CSVtext]);
 
-  return JSONData;
+  return {
+    JSONData,
+    doJSONData: setCSVtext
+  };
 }

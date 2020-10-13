@@ -11,9 +11,9 @@ Basic tasks:
 - ~~map ".csv" data to format needed,~~
 - ~~create a first non-interactive chart with basic data~~, 
 - add styles,
-- implement a way of modifying the chart with inputs,
+- ~~implement a way of modifying the chart with inputs~~,
 - control bundle size,
-- add proper README.md info (including tests granularity).
+- add proper README.md info (including tests granularity and lack of TS in tests, and storybook explanations, sorting comes with backend data).
 
 Nice to have: 
 - RWD, 

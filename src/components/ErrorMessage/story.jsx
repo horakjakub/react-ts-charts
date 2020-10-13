@@ -4,6 +4,7 @@ import ErrorMessage from '.';
 
 export default {
   title: 'ErrorMessage',
+  decorator: GlobalStyle,
 };
 
 export const ErrorMessageDefault = () => {
