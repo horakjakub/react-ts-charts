@@ -5,12 +5,12 @@ The project was created for recruitment needs. The goal here is to get data from
 ## Todo (may change with time)
 
 Basic tasks:
-- ~~fetch data,~~ 
+- ~~fetch data~~,
 - ~~select components library~~, 
 - ~~select charts library~~, 
-- ~~map ".csv" data to format needed,~~
+- ~~map ".csv" data to format needed~~,
 - ~~create a first non-interactive chart with basic data~~, 
-- add styles,
+- ~~add styles~~,
 - ~~implement a way of modifying the chart with inputs~~,
 - control bundle size,
 - add proper README.md info (including tests granularity and lack of TS in tests, and storybook explanations, sorting comes with backend data).
