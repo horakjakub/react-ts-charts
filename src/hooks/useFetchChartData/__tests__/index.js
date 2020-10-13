@@ -22,6 +22,7 @@ const fetchErrorMock = async () => {
 
 describe('useFetchChartData()', () => {
   beforeAll(() => jest.spyOn(window, 'fetch'));
+
   beforeEach(() => {
     window.fetch.mockImplementation(fetchSuccessMock);
     window.fetch.mockClear();

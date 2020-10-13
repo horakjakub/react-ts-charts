@@ -10,8 +10,8 @@ function getAllImpressionsOrClicks(chartData, impressionsOrClicks) {
   );
 }
 
-function generateRandomMockedChartDataWithChangedData(chardDatal, newDate) {
-  return mockedChartData
+function generateRandomMockedChartDataWithChangedData(chardData, newDate) {
+  return chardData 
     .slice(0, 20 + Math.ceil(Math.random() * 10))
     .map((chartData) => ({
       ...chartData,
@@ -43,12 +43,14 @@ describe('useGroupInTimeChartData()', () => {
     );
     const allClicks = getAllImpressionsOrClicks(mockedChartData, 'clicks');
 
-    expect(result.current.groupedData[0].impressions).toBe(allImpressions);
-    expect(result.current.groupedData[0].clicks).toBe(allClicks);
-    expect(result.current.groupedData[1]).toBe(undefined);
+    const { groupedData } = result.current;
+
+    expect(groupedData[0].impressions).toBe(allImpressions);
+    expect(groupedData[0].clicks).toBe(allClicks);
+    expect(groupedData[1]).toBe(undefined);
   });
 
-  it('should return sums of clicks and impressions grouped in one object by week if called with chart data from different weeks', () => {
+  it('should return sums of clicks and impressions grouped in one week object if called with chart data from different weeks', () => {
     const mockedChartDataFromSecondWeek = generateRandomMockedChartDataWithChangedData(
       mockedChartData,
       '08.01.2019'
@@ -78,11 +80,13 @@ describe('useGroupInTimeChartData()', () => {
       'clicks'
     );
 
-    expect(result.current.groupedData[0].impressions).toBe(allImpressions);
-    expect(result.current.groupedData[0].clicks).toBe(allClicks);
-    expect(result.current.groupedData[1].impressions).toBe(
-      allImpressionsFromSecondWeek
+    const { groupedData } = result.current;
+    expect(groupedData[0].impressions).toBe(allImpressions);
+    expect(groupedData[0].clicks).toBe(allClicks);
+    expect(groupedData[1].impressions).toBe(allImpressionsFromSecondWeek);
+    expect(groupedData[1].clicks).toBe(allClicksFromSecondWeek);
+    expect(groupedData[0].order < result.current.groupedData[1].order).toBe(
+      true
     );
-    expect(result.current.groupedData[1].clicks).toBe(allClicksFromSecondWeek);
   });
 });

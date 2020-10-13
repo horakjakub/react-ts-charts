@@ -2,7 +2,7 @@ import { renderHook, act } from '@testing-library/react-hooks';
 import mockedChartData from 'utils/mocks/chart-points.mock';
 import useFilterChartData from '..';
 
-describe('useFilterData2()', () => {
+describe('useFilterData()', () => {
   it('should return null if nothing passed', () => {
     const { result } = renderHook(() => useFilterChartData());
 
@@ -11,7 +11,7 @@ describe('useFilterData2()', () => {
 
   it('should return chart data if no filters passed', () => {
     const { result } = renderHook(() => useFilterChartData());
-    
+
     act(() => {
       result.current.setChartData(mockedChartData);
     });
@@ -21,7 +21,7 @@ describe('useFilterData2()', () => {
 
   it('should return chart data if passed filters are empty', () => {
     const { result } = renderHook(() => useFilterChartData());
-    
+
     act(() => {
       result.current.setChartData(mockedChartData);
       result.current.setFilters({
