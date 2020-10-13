@@ -7,7 +7,7 @@ This project is the result of the time given for one developer and the time whic
 - :x: there is no Lodash in a project - I couldn't find a place for it in my implementation (I tried!), but maybe I don't know it API so well, 
 - :memo: Backend Contract - I haven't applied sorting by date logic, because data returned from the server was sorted so at the moment it wasn't necessary, but I think it's worth highlighting that the contract includes not only data shape but also default sorting.
 
-### And others
+### And others :construction:
 Storybook contains only basic storybook config, bundle size is a bit heavy, and probably CSV to JSON library should be removed or replaced, and there is a lot of things which are missing or could be improved, and I'm aware of that but the goal which I took here was to deliver something useful and relatively stable.
 
 ## Basic Info  
