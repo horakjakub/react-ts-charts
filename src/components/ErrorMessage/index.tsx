@@ -1,6 +1,7 @@
 import React, { memo, useState, useEffect } from 'react';
 import Button from '@atlaskit/button';
 import { DATA_URL } from 'hooks/useFetchChartData';
+import { ButtonWrapper } from './styled';
 
 export default memo(ErrorMessage);
 
@@ -18,7 +19,13 @@ function ErrorMessage({ error }: Props) {
   return (
     <div>
       Ooops! There are some issues with given <a href={DATA_URL}>API point</a>.
-      <Button onClick={() => setShowErrorDetails(true)}>SHOW DETAILS</Button>
+      {!showErrorDetails && (
+        <ButtonWrapper>
+          <Button onClick={() => setShowErrorDetails(true)}>
+            SHOW DETAILS
+          </Button>
+        </ButtonWrapper>
+      )}
       {showErrorDetails && <div> Error message: "{error.message}" </div>}
     </div>
   );

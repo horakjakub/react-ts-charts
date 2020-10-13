@@ -2,6 +2,7 @@ import React, { ReactElement, useState, memo, useMemo } from 'react';
 import Button from '@atlaskit/button';
 import Select, { ValueType } from '@atlaskit/select';
 import { Filters } from 'hooks/useFilterChartData';
+import { Wrapper, SelectWrapper } from './styled';
 
 export interface Props {
   campaigns: Set<string> | null;
@@ -41,8 +42,9 @@ function ControlPanel({
   );
 
   return (
-    <section>
-      <div>
+    <Wrapper>
+      <h4>Filter dimension values </h4>
+      <SelectWrapper>
         <Select
           className="campaign-select"
           classNamePrefix="react-select"
@@ -60,8 +62,8 @@ function ControlPanel({
             );
           }}
         />
-      </div>
-      <div>
+      </SelectWrapper>
+      <SelectWrapper>
         <Select
           className="data-source-select"
           classNamePrefix="react-select"
@@ -76,10 +78,10 @@ function ControlPanel({
               values && values instanceof Array
                 ? values.map(({ value }: { value: string }) => value)
                 : []
-            ); 
+            );
           }}
         />
-      </div>
+      </SelectWrapper>
       <Button
         isDisabled={
           isDisabled ||
@@ -92,6 +94,6 @@ function ControlPanel({
       >
         Apply
       </Button>
-    </section>
+    </Wrapper>
   );
 }
