@@ -36,13 +36,11 @@ describe('useChartData()', () => {
       result.current.doConvertToChartData(null);
     });
 
-    expect(result.current.campaigns instanceof Set).toBe(true);
-    expect(result.current.campaigns.has(mockedRawChartData[0].Campaign)).toBe(
-      true
-    );
-    expect(result.current.campaigns.has(mockedRawChartData[1].Campaign)).toBe(
-      true
-    );
+    const { campaigns } = result.current;
+
+    expect(campaigns instanceof Set).toBe(true);
+    expect(campaigns.has(mockedRawChartData[0].Campaign)).toBe(true);
+    expect(campaigns.has(mockedRawChartData[1].Campaign)).toBe(true);
   });
 
   it('should return data sources set from data taken from JSON hook', () => {
@@ -52,13 +50,11 @@ describe('useChartData()', () => {
       result.current.doConvertToChartData(null);
     });
 
-    expect(result.current.dataSources instanceof Set).toBe(true);
-    expect(
-      result.current.dataSources.has(mockedRawChartData[0].Datasource)
-    ).toBe(true);
-    expect(
-      result.current.dataSources.has(mockedRawChartData[1].Datasource)
-    ).toBe(true);
+    const { dataSources } = result.current;
+
+    expect(dataSources instanceof Set).toBe(true);
+    expect(dataSources.has(mockedRawChartData[0].Datasource)).toBe(true);
+    expect(dataSources.has(mockedRawChartData[1].Datasource)).toBe(true);
   });
 
   it('should return mapped chart data with correct types taken from data taken from JSON hook', () => {
@@ -68,14 +64,13 @@ describe('useChartData()', () => {
       result.current.doConvertToChartData(null);
     });
 
-    expect(result.current.chartData.length).toBe(mockedRawChartData.length);
-    expect(typeof result.current.chartData[0].impressions === 'number').toBe(
-      true
-    );
-    expect(typeof result.current.chartData[0].clicks === 'number').toBe(true);
+    const { chartData } = result.current;
+    expect(chartData.length).toBe(mockedRawChartData.length);
+    expect(typeof chartData[0].impressions === 'number').toBe(true);
+    expect(typeof chartData[0].clicks === 'number').toBe(true);
   });
 
-  it("should return null values if raw chart data doesn't contain any value", () => {
+  it("should return null values if JSON data doesn't contain any value", () => {
     useCSVtoJSON.mockImplementation(() => ({
       JSONData: [],
       doJSONData: doJSONDataSpy,
@@ -91,7 +86,7 @@ describe('useChartData()', () => {
       campaigns: null,
       chartData: null,
       dataSources: null,
-      doConvertToChartData: doJSONDataSpy 
+      doConvertToChartData: doJSONDataSpy,
     });
   });
 
@@ -111,7 +106,7 @@ describe('useChartData()', () => {
       campaigns: null,
       chartData: null,
       dataSources: null,
-      doConvertToChartData: doJSONDataSpy 
+      doConvertToChartData: doJSONDataSpy,
     });
   });
 });

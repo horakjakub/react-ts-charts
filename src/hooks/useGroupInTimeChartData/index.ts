@@ -7,11 +7,7 @@ export type GroupingInterval = 'week' | 'month';
 export type BasicChartPoint = Pick<
 ChartPoint,
 'clicks' | 'impressions' | 'date'
->;
-
-interface ChartDataGroups {
-  [key: number]: BasicChartPoint;
-}
+> & { order: number };
 
 export default function useGroupChartData(
   groupingInterval: GroupingInterval
@@ -27,7 +23,7 @@ export default function useGroupChartData(
   useEffect(() => {
     if (chartData) {
       const groups = chartData.reduce(
-        (acc: ChartDataGroups, { date, clicks, impressions }: ChartPoint) => {
+        (acc: BasicChartPoint[], { date, clicks, impressions }: ChartPoint) => {
           const momentDate: Moment = moment(date, 'DD.MM.YYYY');
 
           const groupDate =
@@ -35,37 +31,43 @@ export default function useGroupChartData(
               ? momentDate.isoWeek()
               : momentDate.month();
 
-          if (groupDate in acc)
-            return {
-              ...acc,
-              [groupDate]: {
-                date: acc[groupDate].date,
-                clicks: acc[groupDate].clicks + clicks,
-                impressions: acc[groupDate].impressions + impressions,
-              },
-            };
+          let entryForThisDate: BasicChartPoint | undefined;
+          const restOfEntries = acc.filter((point) => {
+            const { order } = point;
 
-          return {
+            if (order === groupDate) {
+              entryForThisDate = point;
+              return false;
+            }
+            return true;
+          });
+
+          if (entryForThisDate) {
+            return [
+              ...restOfEntries,
+              {
+                ...entryForThisDate,
+                clicks: entryForThisDate.clicks + clicks,
+                impressions: entryForThisDate.impressions + impressions,
+              },
+            ];
+          }
+          return [
             ...acc,
-            [groupDate]: {
+            {
               clicks,
               impressions,
               date:
                 groupingInterval === 'week'
                   ? momentDate.weekday(7).format('D MMM YYYY')
                   : momentDate.format('MMM YYYY'),
+              order: groupDate,
             },
-          };
+          ];
         },
-        {}
-      );
-
-      const groupedChartData = Object.values(groups).reduce(
-        (acc: BasicChartPoint[], group: BasicChartPoint) => [...acc, group],
         []
       );
-
-      setGroupedData(groupedChartData);
+      setGroupedData(groups);
     } else {
       setGroupedData(null);
     }
