@@ -1,11 +1,7 @@
 import React, { ReactElement, useState, memo, useMemo } from 'react';
 import Button from '@atlaskit/button';
 import Select, { ValueType } from '@atlaskit/select';
-
-export interface Filters {
-  selectedCampaigns: string[];
-  selectedDataSources: string[];
-}
+import { Filters } from 'hooks/useFilterChartData';
 
 export interface Props {
   campaigns: Set<string> | null;

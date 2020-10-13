@@ -1,35 +1,36 @@
-import { useEffect, useState } from 'react';
-import { ChartPointData } from 'hooks/useChartData';
+import { useEffect, useState, Dispatch, SetStateAction } from 'react';
+import { ChartPoint } from 'hooks/useChartData';
 import moment, { Moment } from 'moment';
 
 export type GroupingInterval = 'week' | 'month';
 
-export interface ChartPoint {
-  clicks: number;
-  impressions: number;
-  date: string;
-}
+export type BasicChartPoint = Pick<
+ChartPoint,
+'clicks' | 'impressions' | 'date'
+>;
 
 interface ChartDataGroups {
-  [key: number]: ChartPoint;
+  [key: number]: BasicChartPoint;
 }
 
 export default function useGroupChartData(
-  chartData: ChartPointData[] | null,
   groupingInterval: GroupingInterval
-): ChartPoint[] | null {
-  const [groupedData, setGroupedData] = useState<ChartPoint[] | null>(null);
+): {
+    groupedData: BasicChartPoint[] | null;
+    setChartData: Dispatch<SetStateAction<ChartPoint[] | null>>;
+  } {
+  const [groupedData, setGroupedData] = useState<BasicChartPoint[] | null>(
+    null
+  );
+  const [chartData, setChartData] = useState<ChartPoint[] | null>(null);
 
   useEffect(() => {
     if (chartData) {
       const groups = chartData.reduce(
-        (
-          acc: ChartDataGroups,
-          { date, clicks, impressions }: ChartPointData
-        ) => {
+        (acc: ChartDataGroups, { date, clicks, impressions }: ChartPoint) => {
           const momentDate: Moment = moment(date, 'DD.MM.YYYY');
 
-          const groupDate: number =
+          const groupDate =
             groupingInterval === 'week'
               ? momentDate.isoWeek()
               : momentDate.month();
@@ -60,13 +61,18 @@ export default function useGroupChartData(
       );
 
       const groupedChartData = Object.values(groups).reduce(
-        (acc: ChartPoint[], group: ChartPoint) => [...acc, group],
+        (acc: BasicChartPoint[], group: BasicChartPoint) => [...acc, group],
         []
       );
 
       setGroupedData(groupedChartData);
+    } else {
+      setGroupedData(null);
     }
   }, [chartData, groupingInterval]);
 
-  return groupedData;
+  return {
+    groupedData,
+    setChartData,
+  };
 }

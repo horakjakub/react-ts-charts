@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
-import { ChartPoint } from 'hooks/useGroupChartData';
+import { BasicChartPoint } from 'hooks/useGroupInTimeChartData';
 import { LineChart, Line, Tooltip, YAxis, XAxis, Legend } from 'recharts';
 
 export interface Props {
-  chardData: ChartPoint[];
+  chardData: BasicChartPoint[];
 }
 
 export default memo(Dashboard);
