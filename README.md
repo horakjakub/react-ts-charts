@@ -1,41 +1,56 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Basic Info
 
-## Available Scripts
+The project was created for recruitment needs. The goal here is to get data from selected [endpoint](https://jakubhorak.s3-eu-west-1.amazonaws.com/DAMKBAoDBwoDBAkOBAYFCw.csv) and present it as a biaxal chart with few inputs which will control the way of presenting data at the chart using Create React App and TypeScript. The project is small, neat, has nice repo history, and contains the most important things achievable in 3-4 working days, so I decided to keep it as a code sample also for other recruitment processes (after making it more generic).
 
-In the project directory, you can run:
+### Scripts
 
-### `yarn start`
+```
+npm i
+npm start
+npm run test // --> for tests
+npm run storybook // --> for storybook
+```
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Introduction & Design Decisions
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+This project is the result of the time given for one developer (3-4 working days) the time which I could sacrifice for it so I focused only on the things which are important the most and are achievable in the predicted period of the time. It shouldn't be treated like a "perfect solution" - rather as "good enough", considered taken resources :heart:
 
-### `yarn test`
+### Most important decisions:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- :sweat: Chart library selection - a day before accomplishing the whole solution, I discovered that the library which I've chosen initially to prepare dashboards ("recharts"), doesn't perform well with large data sets and doesn't offer a good solution to handle such data. After three hours of research and checking other React chart libraries ("react-vis", "biz-charts", "nivo") and I haven't found a solution that meets this problem, has easy to use API, and also offers to show data in Biaxial line chart. Because I couldn't sacrifice more time for that, I've decided to group data in time inside hook logic before serving it into the dashboard and go back to "recharts" library.
+- :exclamation: Tests - coverage includes most of the logic because was written for all custom hooks. Tests are a little chaotic (written in pure .js), granularity, and clarity may be better, but I wrote them in rush. I hoped that I will find a time for testing components, but I didn't so I decided to leave them only with storybooks.
+- :memo: Backend Contract - I haven't applied sorting by date logic, because data returned from the server was sorted so at the moment it wasn't necessary, but I think it's worth highlighting that the contract includes not only data shape but also default sorting.
 
-### `yarn build`
+### And others :construction:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Storybook contains only basic storybook config, bundle size is a bit heavy, and probably CSV to JSON library should be removed or replaced, and there is a lot of things which are missing or could be improved, and I'm aware of that but the goal which I took here was to deliver something useful and relatively stable in allotted time.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Todo (may change with time)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Basic tasks:
 
-### `yarn eject`
+- ~~fetch data~~,
+- ~~select components library~~,
+- ~~select charts library~~,
+- ~~map ".csv" data to format needed~~,
+- ~~create a first non-interactive chart with basic data~~,
+- ~~add styles~~,
+- ~~implement a way of modifying the chart with inputs~~,
+- ~~control bundle size~~,
+- ~~add proper README.md info (including tests granularity and lack of TS in tests, and storybook explanations, sorting comes with backend data)~~.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Nice to have:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- RWD - _partially implemented_,
+- deployment,
+- build,
+- some functional tests,
+- accessibility,
+- storybook - _partially implemented_.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Requirements: create-react-api, typescript
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Learn More
 
