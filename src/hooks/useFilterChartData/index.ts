@@ -30,7 +30,7 @@ function filterChartDataBy(
   return chartData;
 }
 
-export default function useFilterChartData2(): {
+export default function useFilterChartData(): {
   filters: Filters;
   filteredData: ChartPoint[] | null;
   setFilters: Dispatch<SetStateAction<Filters>>;

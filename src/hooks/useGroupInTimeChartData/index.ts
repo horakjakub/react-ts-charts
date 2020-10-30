@@ -9,7 +9,7 @@ ChartPoint,
 'clicks' | 'impressions' | 'date'
 > & { order: number };
 
-export default function useGroupChartData(
+export default function useGroupInTimeData(
   groupingInterval: GroupingInterval
 ): {
     groupedData: BasicChartPoint[] | null;
