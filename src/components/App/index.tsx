@@ -53,7 +53,7 @@ function App() {
 
   return (
     <Wrapper>
-      <H3>Adverity Advertising Data ELT-V Challenge</H3>
+      <H3>Bigger data set in charts challenge</H3>
       <Header>
         Hitting "Apply", filters the chart to show a timeseries for both Clicks
         and Impressions for given Datasouces and Campaigns - logical AND

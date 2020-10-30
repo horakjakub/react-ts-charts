@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export const DATA_URL =
-  'http://adverity-challenge.s3-website-eu-west-1.amazonaws.com/DAMKBAoDBwoDBAkOBAYFCw.csv';
+  'https://jakubhorak.s3-eu-west-1.amazonaws.com/DAMKBAoDBwoDBAkOBAYFCw.csv';
 
 export interface ChartDataApiResponse {
   isLoading: boolean;
